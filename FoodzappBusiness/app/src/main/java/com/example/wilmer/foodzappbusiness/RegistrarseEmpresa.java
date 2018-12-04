@@ -33,7 +33,7 @@ public class RegistrarseEmpresa extends AppCompatActivity {
     private EditText Descripcion;
 
     private FirebaseAuth mAuth;
-
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
@@ -55,11 +55,22 @@ public class RegistrarseEmpresa extends AppCompatActivity {
         //boton logout
         logout=(Button)findViewById(R.id.button5);
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if(firebaseAuth.getCurrentUser()!=null) {
+
+                }
+            }
+        };
 
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Registrar();
+                Crear_autetificacion();
             }
         });
         logout.setOnClickListener(new View.OnClickListener() {
@@ -72,13 +83,16 @@ public class RegistrarseEmpresa extends AppCompatActivity {
 
     }
 
-
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
     private void Registrar() {
         final String mNombreEmpresa = NombreEmpresa.getText().toString();
         final String mPassWord = PassWord.getText().toString();
         final String mNumber = Number.getText().toString();
-        final String mEmail = Number.getText().toString();
+        final String mEmail = Email.getText().toString();
         final String mRNC = RNC.getText().toString();
         final String mDescripcion = Descripcion.getText().toString();
 
@@ -94,6 +108,29 @@ public class RegistrarseEmpresa extends AppCompatActivity {
                 mRNC,
                 mDescripcion);
         myref.child(Referencias.newBusinessUser_REFERENCE).push().setValue(BU);
+    }
+
+    public void Crear_autetificacion() {
+        final String mPassWord = PassWord.getText().toString();
+        final String mEmail = Email.getText().toString();
+
+        mAuth.createUserWithEmailAndPassword(mEmail, mPassWord)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail", task.getException());
+                            Toast.makeText(RegistrarseEmpresa.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        // ...
+                    }
+                });
     }
 
 
