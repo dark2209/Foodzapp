@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">FoodzappBusiness</string>
+    <string name="comienza">Ya tengo una cuenta!</string>
+    <string name="continuar">Continuar</string>
+    <string name="usuarionombre">Nombre de usuario</string>
+    <string name="empresanombre">Nombre de empresa</string>
+    <string name="contrasenia">Ingrese la contraseña</string>
+    <string name="resitrarse">Registrarse</string>
+    <string name="resitrarseEmp">Clientes</string>
+    <string name="email">Ingrese un Email</string>
+    <string name="unete">Unete a nosotros</string>
+    <string name="uneteEmp">Se parte de nosotros</string>
+</resources>

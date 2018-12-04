@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "994298841805",
+    "firebase_url": "https://foodzapp-722d7.firebaseio.com",
+    "project_id": "foodzapp-722d7",
+    "storage_bucket": "foodzapp-722d7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994298841805:android:33be2b71c8efbc72",
+        "android_client_info": {
+          "package_name": "com.example.wilmer.foodzappbusiness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994298841805-mrtk8foeptgvcc420fdkvon3pd4k2j1j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wilmer.foodzappbusiness",
+            "certificate_hash": "99c7ecf268b756a7389384f2bfda236cc94e387b"
+          }
+        },
+        {
+          "client_id": "994298841805-isoml6do1m0cg1pg20pe3rnimf3n6mil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCixjyhok9IUxahoc6hMNG6I7YtV_PgJxE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "994298841805-isoml6do1m0cg1pg20pe3rnimf3n6mil.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994298841805:android:52e8e27eb9e6e1d9",
+        "android_client_info": {
+          "package_name": "dddada.dad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994298841805-isoml6do1m0cg1pg20pe3rnimf3n6mil.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCixjyhok9IUxahoc6hMNG6I7YtV_PgJxE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
