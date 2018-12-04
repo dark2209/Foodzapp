@@ -17,8 +17,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class RegistrarseEmpresa extends AppCompatActivity {
 
@@ -31,6 +34,8 @@ public class RegistrarseEmpresa extends AppCompatActivity {
     private EditText Email;
     private EditText RNC;
     private EditText Descripcion;
+
+    private DatabaseReference myref;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -58,7 +63,6 @@ public class RegistrarseEmpresa extends AppCompatActivity {
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-
                 if(firebaseAuth.getCurrentUser()!=null) {
 
                 }
@@ -68,8 +72,6 @@ public class RegistrarseEmpresa extends AppCompatActivity {
         registrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Registrar();
                 Crear_autetificacion();
             }
         });
@@ -88,31 +90,15 @@ public class RegistrarseEmpresa extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    private void Registrar() {
-        final String mNombreEmpresa = NombreEmpresa.getText().toString();
-        final String mPassWord = PassWord.getText().toString();
-        final String mNumber = Number.getText().toString();
-        final String mEmail = Email.getText().toString();
-        final String mRNC = RNC.getText().toString();
-        final String mDescripcion = Descripcion.getText().toString();
 
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myref = database.getReference(Referencias.BusinessUser_REFERENCE);
-        BusinessUser BU = new BusinessUser(
-                //Agregando valores
-                mNombreEmpresa,
-                mPassWord,
-                mNumber,
-                mEmail,
-                mRNC,
-                mDescripcion);
-        myref.child(Referencias.newBusinessUser_REFERENCE).push().setValue(BU);
-    }
 
     public void Crear_autetificacion() {
-        final String mPassWord = PassWord.getText().toString();
-        final String mEmail = Email.getText().toString();
+        final String mNombreEmpresa = NombreEmpresa.getText().toString().trim();
+        final String mPassWord = PassWord.getText().toString().trim();
+        final String mNumber = Number.getText().toString().trim();
+        final String mEmail = Email.getText().toString().trim();
+        final String mRNC = RNC.getText().toString().trim();
+        final String mDescripcion = Descripcion.getText().toString().trim();
 
         mAuth.createUserWithEmailAndPassword(mEmail, mPassWord)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -123,7 +109,17 @@ public class RegistrarseEmpresa extends AppCompatActivity {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
-                        if (!task.isSuccessful()) {
+                        if(task.isSuccessful()){
+                            mAuth.signInWithEmailAndPassword(mEmail,mPassWord);
+                            myref = FirebaseDatabase.getInstance().getReference().child(Referencias.BusinessUser_REFERENCE);
+                            DatabaseReference currentDB = myref.child(mAuth.getCurrentUser().getUid());
+                            currentDB.child("Empresa").setValue(mNombreEmpresa);
+                            currentDB.child("Number").setValue(mNumber);
+                            currentDB.child("RNC").setValue(mRNC);
+                            currentDB.child("Descripcion").setValue(mDescripcion);
+
+                        }
+                        else{
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(RegistrarseEmpresa.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();

@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegistrarseEmpresa"></activity>
+        <activity android:name=".RegistrarseEmpresa" />
+        <activity android:name=".Firebase.verificar" />
+        <activity android:name=".verificar"></activity>
     </application>
 
 </manifest>
