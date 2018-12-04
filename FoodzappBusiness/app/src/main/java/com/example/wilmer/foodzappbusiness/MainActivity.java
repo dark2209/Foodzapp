@@ -55,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        mRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,RegistrarseEmpresa.class));
+            }
+        });
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
