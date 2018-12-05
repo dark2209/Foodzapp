@@ -1,5 +1,6 @@
 package com.example.wilmer.foodzappbusiness;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class verificar extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private TextView mTextView;
+    private TextView mTextView,mTextView2,mTextView3,mTextView4;
     private Button mButton;
 
     @Override
@@ -31,6 +32,9 @@ public class verificar extends AppCompatActivity {
         setContentView(R.layout.activity_verificar);
 
         mTextView=(TextView)findViewById(R.id.textView2);
+        mTextView2=(TextView)findViewById(R.id.textView3);
+        mTextView3=(TextView)findViewById(R.id.textView4);
+        mTextView4=(TextView)findViewById(R.id.textView5);
         mButton=(Button)findViewById(R.id.button3);
 
 
@@ -39,6 +43,7 @@ public class verificar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(verificar.this,MainActivity.class));
             }
         });
 
@@ -55,6 +60,10 @@ public class verificar extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             mTextView.setText(String.valueOf(dataSnapshot.child("Empresa").getValue()));
+                            mTextView2.setText(String.valueOf(dataSnapshot.child("Number").getValue()));
+                            mTextView3.setText(String.valueOf(dataSnapshot.child("RNC").getValue()));
+                            mTextView4.setText(String.valueOf(dataSnapshot.child("Descripcion").getValue()));
+
                         }
 
                         @Override
